@@ -6,7 +6,7 @@
 
 using namespace std;
 
-//структура, описывающая i-ый город
+//СЃС‚СЂСѓРєС‚СѓСЂР°, РѕРїРёСЃС‹РІР°СЋС‰Р°СЏ i-С‹Р№ РіРѕСЂРѕРґ
 struct city
 {
 	int value;
@@ -14,18 +14,15 @@ struct city
 };
 
 
-//для корректной сортировки
-//от меньшего к большему
-//false - меняем местами
-//true - менять местами не надо
+
 bool comp(city l, city r)
 {
-	//сначала проверяем не равное ли количество людей перевезли два города за год
+	//СЃРЅР°С‡Р°Р»Р° РїСЂРѕРІРµСЂСЏРµРј РЅРµ СЂР°РІРЅРѕРµ Р»Рё РєРѕР»РёС‡РµСЃС‚РІРѕ Р»СЋРґРµР№ РїРµСЂРµРІРµР·Р»Рё РґРІР° РіРѕСЂРѕРґР° Р·Р° РіРѕРґ
 	if (l.value == r.value)
 	{
-		return l.number < r.number; //сортируем по возрастанию номера города
+		return l.number < r.number; //СЃРѕСЂС‚РёСЂСѓРµРј РїРѕ РІРѕР·СЂР°СЃС‚Р°РЅРёСЋ РЅРѕРјРµСЂР° РіРѕСЂРѕРґР°
 	}
-	return l.value < r.value;		//сортируем по кол-ву перевезенных людей
+	return l.value < r.value;		//СЃРѕСЂС‚РёСЂСѓРµРј РїРѕ РєРѕР»-РІСѓ РїРµСЂРµРІРµР·РµРЅРЅС‹С… Р»СЋРґРµР№
 }
 
 ostream& operator << (ostream& stream, city& a)
@@ -34,22 +31,22 @@ ostream& operator << (ostream& stream, city& a)
 	return stream;
 }
 
-//функция обработки запроса
+//С„СѓРЅРєС†РёСЏ РѕР±СЂР°Р±РѕС‚РєРё Р·Р°РїСЂРѕСЃР°
 bool Query(int l, int r, int x, vector<city> &input_city, city *arr)
 {
-	//проверка на то, что мы ищем конкретный город
+	//РїСЂРѕРІРµСЂРєР° РЅР° С‚Рѕ, С‡С‚Рѕ РјС‹ РёС‰РµРј РєРѕРЅРєСЂРµС‚РЅС‹Р№ РіРѕСЂРѕРґ
 	if (l == r && arr[l - 1].value == x)
 	{
 		return true;
 	}
 	
-	//находим нижнюю границу для пары (x, l)
+	//РЅР°С…РѕРґРёРј РЅРёР¶РЅСЋСЋ РіСЂР°РЅРёС†Сѓ РґР»СЏ РїР°СЂС‹ (x, l)
 	int Left = lower_bound(input_city.begin(), input_city.end(), city({ x , l }), comp) - input_city.begin();
 	//cout << "Left is: " << Left << endl;
 	//cout << "Left: " << (*lower_bound(input_city.begin(), input_city.end(), city({ x , l }), comp)) << endl;
 	//cout << "Right : " << (*upper_bound(input_city.begin(), input_city.end(), city({ x , r }), comp)) << endl;
 	
-	//находим верхнюю границу для пары (x, r)
+	//РЅР°С…РѕРґРёРј РІРµСЂС…РЅСЋСЋ РіСЂР°РЅРёС†Сѓ РґР»СЏ РїР°СЂС‹ (x, r)
 	int Right = upper_bound(input_city.begin(), input_city.end(), city({ x , r }), comp) - input_city.begin();
 	/*cout << "Right is: " << Right << endl;*/
 
@@ -62,21 +59,21 @@ bool Query(int l, int r, int x, vector<city> &input_city, city *arr)
 
 int main()
 {
-	vector<city> d;		//вектор городов
-	vector<bool> ans;	//вектор ответов
+	vector<city> d;		//РІРµРєС‚РѕСЂ РіРѕСЂРѕРґРѕРІ
+	vector<bool> ans;	//РІРµРєС‚РѕСЂ РѕС‚РІРµС‚РѕРІ
 
 	int n;
 	cin >> n;
 
 	
 
-	city *arr = new city[n];	//вспомогательный массив
+	city *arr = new city[n];	//РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Р№ РјР°СЃСЃРёРІ
 
 	for (int i = 1; i <= n; i++)
 	{
 		int x;
 		cin >> x;
-		d.push_back({ x, i }); //положить в список город, город с параметрами value = x, number = i
+		d.push_back({ x, i }); //РїРѕР»РѕР¶РёС‚СЊ РІ СЃРїРёСЃРѕРє РіРѕСЂРѕРґ, РіРѕСЂРѕРґ СЃ РїР°СЂР°РјРµС‚СЂР°РјРё value = x, number = i
 		arr[i - 1].value = x;
 		arr[i - 1].number = i;
 	}
@@ -84,20 +81,20 @@ int main()
 	int q;
 	cin >> q;
 	int l, r, x;
-	//сортирую массив по возрастанию городов
+	//СЃРѕСЂС‚РёСЂСѓСЋ РјР°СЃСЃРёРІ РїРѕ РІРѕР·СЂР°СЃС‚Р°РЅРёСЋ РіРѕСЂРѕРґРѕРІ
 	
 	sort(d.begin(), d.end(), comp);
 
-	//пока запросы не завершились
+	//РїРѕРєР° Р·Р°РїСЂРѕСЃС‹ РЅРµ Р·Р°РІРµСЂС€РёР»РёСЃСЊ
 	while (q--)
 	{
 		cin >> l >> r >> x;
-		//записываю результат выполнения функции Query в вектор ответов
+		//Р·Р°РїРёСЃС‹РІР°СЋ СЂРµР·СѓР»СЊС‚Р°С‚ РІС‹РїРѕР»РЅРµРЅРёСЏ С„СѓРЅРєС†РёРё Query РІ РІРµРєС‚РѕСЂ РѕС‚РІРµС‚РѕРІ
 		ans.push_back(Query(l, r, x, d, arr)); 
 	}
 
 
-	//вывожу ответ
+	//РІС‹РІРѕР¶Сѓ РѕС‚РІРµС‚
 	for (int item : ans)
 		cout << item;
 	return 0;

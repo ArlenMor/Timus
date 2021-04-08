@@ -20,12 +20,10 @@ int main()
 	double l = -2000.000, r = 2000.00;
 	while (l - r < eps)
 	{
-		//mid - переменная, от которой мы ведем отсчет
+		//mid - РїРµСЂРµРјРµРЅРЅР°СЏ, РѕС‚ РєРѕС‚РѕСЂРѕР№ РјС‹ РІРµРґРµРј РѕС‚СЃС‡РµС‚
 		double mid = (l + r) / 2.0;
 		a[1] = mid;
 		solve();
-		//модуль
-		//fixed and setprecisiom - для 2 знаков после ,
 		if (fabs(a[N + 1] - x) < eps) { cout << fixed << setprecision(2) << mid ; break; }
 		else if (a[N + 1] < x)r = mid; else l = mid;
 	}
